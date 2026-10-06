@@ -107,3 +107,4 @@ pytest tests/ -v --tb=short
 ```
 
 Expected output: **38 tests, 0 failures, 0 errors**.
+
