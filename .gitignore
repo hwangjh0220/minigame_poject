@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 __pycache__/
-=======
 # 가상환경
 venv/
 .venv/
@@ -19,4 +17,3 @@ __pycache__/
 !.vscode/settings.json
 !.vscode/extensions.json
 .DS_Store
->>>>>>> origin/main
