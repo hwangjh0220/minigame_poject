@@ -17,11 +17,11 @@ python main.py
 
 | 역할 | 이름 | GitHub ID | 담당 |
 |---|---|---|---|
-| A | | | 팀장 · `main.py`, `utils.py`, README, 병합 관리 |
-| B | | | `games/hangman.py` (행맨) |
+| A | 황정호 | hwangjh0220 | 팀장 · `main.py`, `utils.py`, README, 병합 관리 |
+| B | 고세진 | kos070721-eng | `games/hangman.py` (행맨) |
 | C | | | `games/baseball.py` (숫자 야구) |
 | D | 양소제 | yangsoje | `games/rps.py` (가위바위보) |
-| E | | | `games/tictactoe.py` (틱택토) |
+| E | 싱프라쉬나 | prashnaraa-byte | `games/tictactoe.py` (틱택토) |
 
 ## 게임 목록
 
