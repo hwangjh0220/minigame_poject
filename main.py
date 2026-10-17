@@ -1,3 +1,11 @@
+# main.py
+# Entry point for the Minigame Collection.
+# Uncomment the line for the game you want to launch.
+
+from games.tictactoe import launch; launch()  # line 4 — Tic-Tac-Toe (active)
+# from games.snake import launch; launch()    # line 5 — Snake        (coming soon)
+# from games.pong import launch; launch()     # line 6 — Pong         (coming soon)
+
 """Game Hub 메인 진입점 — 담당: 팀원 A"""
 
 # ── [충돌 지점 ①] 자기 게임의 import 줄 맨 앞 '# '를 지워 주세요 ──
