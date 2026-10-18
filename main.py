@@ -2,7 +2,7 @@
 # Entry point for the Minigame Collection.
 # Uncomment the line for the game you want to launch.
 
-from games.tictactoe import launch; launch()  # line 4 — Tic-Tac-Toe (active)
+# from games.tictactoe import launch; launch()  # line 4 — Tic-Tac-Toe (active)
 # from games.snake import launch; launch()    # line 5 — Snake        (coming soon)
 # from games.pong import launch; launch()     # line 6 — Pong         (coming soon)
 
@@ -10,17 +10,18 @@ from games.tictactoe import launch; launch()  # line 4 — Tic-Tac-Toe (active)
 
 # ── [충돌 지점 ①] 자기 게임의 import 줄 맨 앞 '# '를 지워 주세요 ──
 from games import hangman
+
 # from games import baseball
 from games import rps
 
-# from games import tictactoe
+from games import tictactoe
 
 # ── [충돌 지점 ②] 자기 게임의 메뉴 줄 맨 앞 '# '를 지워 주세요 ──
 GAMES = {
     "1": hangman,
     # "2": baseball,
     "3": rps,
-    # "4": tictactoe,
+    "4": tictactoe,
 }
 
 

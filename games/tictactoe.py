@@ -13,24 +13,26 @@ Features:
 import random
 import time
 
+GAME_NAME = "틱택토"
 
 # ---------------------------------------------------------------------------
 # ANSI Color Helpers
 # ---------------------------------------------------------------------------
 
+
 class Color:
     """Lightweight ANSI color codes — no third-party library needed."""
 
-    RESET   = "\033[0m"
-    BOLD    = "\033[1m"
+    RESET = "\033[0m"
+    BOLD = "\033[1m"
 
-    RED     = "\033[91m"
-    GREEN   = "\033[92m"
-    YELLOW  = "\033[93m"
-    BLUE    = "\033[94m"
+    RED = "\033[91m"
+    GREEN = "\033[92m"
+    YELLOW = "\033[93m"
+    BLUE = "\033[94m"
     MAGENTA = "\033[95m"
-    CYAN    = "\033[96m"
-    WHITE   = "\033[97m"
+    CYAN = "\033[96m"
+    WHITE = "\033[97m"
 
     BG_DARK = "\033[40m"
 
@@ -116,6 +118,7 @@ def _random_quip(pool: list[str]) -> str:
 # ---------------------------------------------------------------------------
 # Core TicTacToe Class
 # ---------------------------------------------------------------------------
+
 
 class TicTacToe:
     """
@@ -205,9 +208,11 @@ class TicTacToe:
         header = Color.paint(" 🏅  SCOREBOARD  🏅 ", Color.BOLD, Color.YELLOW)
         print(f"\n  {header}")
         for label, val in self.scores.items():
-            color = (Color.RED if "1" in label
-                     else Color.BLUE if "2" in label
-                     else Color.WHITE)
+            color = (
+                Color.RED
+                if "1" in label
+                else Color.BLUE if "2" in label else Color.WHITE
+            )
             print(Color.paint(f"  {label:>10}: {val}", color))
         print()
 
@@ -232,7 +237,8 @@ class TicTacToe:
         if not (1 <= position <= 9):
             return False
         return self.board[position - 1] not in (
-            self.theme["p1_symbol"], self.theme["p2_symbol"]
+            self.theme["p1_symbol"],
+            self.theme["p2_symbol"],
         )
 
     def make_move(self, position: int, player: int) -> bool:
@@ -267,10 +273,10 @@ class TicTacToe:
         """
         for combo in self.WIN_COMBOS:
             a, b, c = combo
-            if (self.board[a] == self.board[b] == self.board[c]
-                    and self.board[a] in (
-                        self.theme["p1_symbol"], self.theme["p2_symbol"]
-                    )):
+            if self.board[a] == self.board[b] == self.board[c] and self.board[a] in (
+                self.theme["p1_symbol"],
+                self.theme["p2_symbol"],
+            ):
                 return 1 if self.board[a] == self.theme["p1_symbol"] else 2
         return None
 
@@ -308,7 +314,7 @@ class TicTacToe:
     def _get_move(self, player: int) -> int:
         """Prompt the active player for a valid move and return it."""
         symbol = Color.paint(self._symbol(player), self._color(player), Color.BOLD)
-        name   = Color.paint(f"Player {player}", self._color(player), Color.BOLD)
+        name = Color.paint(f"Player {player}", self._color(player), Color.BOLD)
         while True:
             raw = input(f"  {name} {symbol}  → Enter cell (1-9): ").strip()
             if raw.isdigit():
@@ -318,7 +324,11 @@ class TicTacToe:
                     time.sleep(0.4)
                     return pos
                 else:
-                    print(Color.paint("  ❌ That cell is taken or out of range!", Color.RED))
+                    print(
+                        Color.paint(
+                            "  ❌ That cell is taken or out of range!", Color.RED
+                        )
+                    )
             else:
                 print(Color.paint("  ❌ Numbers only, please!", Color.RED))
 
@@ -327,14 +337,16 @@ class TicTacToe:
         self.reset_board()
         self._current_player = 1
 
-        print(Color.paint(
-            f"\n  🎮  Theme: {self.theme['name']}",
-            Color.BOLD, Color.MAGENTA
-        ))
-        print(Color.paint(
-            "  Cells are numbered 1-9 (left→right, top→bottom).",
-            Color.WHITE
-        ))
+        print(
+            Color.paint(
+                f"\n  🎮  Theme: {self.theme['name']}", Color.BOLD, Color.MAGENTA
+            )
+        )
+        print(
+            Color.paint(
+                "  Cells are numbered 1-9 (left→right, top→bottom).", Color.WHITE
+            )
+        )
 
         while True:
             self.display_board()
@@ -344,15 +356,11 @@ class TicTacToe:
             winner = self.check_winner()
             if winner is not None:
                 self.display_board()
-                name = Color.paint(
-                    f"Player {winner}", self._color(winner), Color.BOLD
+                name = Color.paint(f"Player {winner}", self._color(winner), Color.BOLD)
+                sym = Color.paint(self._symbol(winner), self._color(winner), Color.BOLD)
+                print(
+                    Color.paint(f"\n  🎊  {name} {sym} WINS! ", Color.GREEN, Color.BOLD)
                 )
-                sym = Color.paint(
-                    self._symbol(winner), self._color(winner), Color.BOLD
-                )
-                print(Color.paint(
-                    f"\n  🎊  {name} {sym} WINS! ", Color.GREEN, Color.BOLD
-                ))
                 print(Color.paint(f"  {_random_quip(_WIN_QUIPS)}", Color.YELLOW))
                 self.scores[f"Player {winner}"] += 1
                 break
@@ -378,7 +386,8 @@ class TicTacToe:
             "\n╔══════════════════════════════╗\n"
             "║   🎮  TIC-TAC-TOE  DELUXE   ║\n"
             "╚══════════════════════════════╝",
-            Color.BOLD, Color.CYAN
+            Color.BOLD,
+            Color.CYAN,
         )
         print(banner)
 
@@ -390,14 +399,19 @@ class TicTacToe:
             self.play_round()
             self.display_scoreboard()
 
-            again = input(Color.paint(
-                "  🔄  Play again? (y/n): ", Color.CYAN
-            )).strip().lower()
+            again = (
+                input(Color.paint("  🔄  Play again? (y/n): ", Color.CYAN))
+                .strip()
+                .lower()
+            )
             if again not in ("y", "yes"):
-                print(Color.paint(
-                    "\n  👋  Thanks for playing! May your Xs and Os forever align.\n",
-                    Color.BOLD, Color.GREEN
-                ))
+                print(
+                    Color.paint(
+                        "\n  👋  Thanks for playing! May your Xs and Os forever align.\n",
+                        Color.BOLD,
+                        Color.GREEN,
+                    )
+                )
                 break
 
 
@@ -405,12 +419,17 @@ class TicTacToe:
 # Module-level convenience launcher
 # ---------------------------------------------------------------------------
 
+
 def launch() -> None:
     """Create a TicTacToe instance and start the interactive session."""
     game = TicTacToe()
     game.run()
 
 
-if __name__ == "__main__":
+def play() -> None:
+    """게임 허브에서 틱택토를 실행한다."""
     launch()
 
+
+if __name__ == "__main__":
+    launch()
